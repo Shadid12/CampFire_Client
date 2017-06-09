@@ -30,13 +30,13 @@ class Nav extends React.Component{
     <span></span>
   </span>
   <div className="nav-right nav-menu">
-    <a className="nav-item">
+    <a className="nav-item" href="/">
       Home
     </a>
-    <a className="nav-item">
+    <a className="nav-item" href="/#/signup">
       Signup
     </a>
-    <a className="nav-item">
+    <a className="nav-item" href="/#/login">
       Login
     </a>
   </div>
