@@ -3,6 +3,9 @@ import React from 'react'
 // libs
 import $ from 'jquery'
 
+// components
+import Nav from '../Nav'
+
 
 class Signup extends React.Component{
 	
@@ -11,7 +14,8 @@ class Signup extends React.Component{
 		this.state = {
 			name: '',
 			email: '',
-			password: ''
+			password: '',
+			isLoggedin: false
 		}
 
 		this.handleName = this.handleName.bind(this)
@@ -54,25 +58,32 @@ class Signup extends React.Component{
 	}
 
 	handleLogin = () => {
+		
 		var url = "https://react-like-a-boss-shadid121.c9users.io/user_token"
-
 		var d = {
 			'auth':{ 'email': this.state.email, 'password': this.state.password }
 		}
-
 		$.ajax({
 		    type: "POST",
 		    url: url,
 		    data: d,
-		    success: function(res){
-		      console.log(res)
+		    success: (res) => {
+		      window.localStorage.setItem('token', res.jwt)
+		      console.log(window.localStorage.getItem('token'))
+		      this.setState({ isLoggedin: !this.state.isLoggedin })
 		    }
 		})
 
 	}
 
+
 	render(){
 		return(
+<div>
+<Nav />
+{
+	!this.state.isLoggedin ?
+	<div>
 
 <div className="container">
 <div className="columns">
@@ -134,6 +145,15 @@ class Signup extends React.Component{
 </div>
 
 </div>
+</div>
+	</div> 
+	:
+	<div>
+		You are Loggen in
+	</div>
+}
+
+
 </div>
 
 
