@@ -43,8 +43,8 @@ class Nav extends React.Component{
     <a className="nav-item" href="/">
       Home
     </a>
-    <a className="nav-item" href="">
-      Profile
+    <a className="nav-item" href="/#/post/new">
+      Make a Post
     </a>
     <a className="nav-item" 
         onClick={ () => {

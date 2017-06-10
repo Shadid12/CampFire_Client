@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import Home from './components/Home'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import PostForm from './components/PostForm'
+import ShowPost from './components/ShowPost'
 
 
 // routes 
@@ -19,6 +21,7 @@ class App extends Component {
           <Route path="/" component={Home}/>
           <Route path="/login" component={Login}/>
           <Route path="/signup" component={Signup}/>
+          <Route path="/post/new" component={PostForm}/>
         </Router>
       </div>
     );
