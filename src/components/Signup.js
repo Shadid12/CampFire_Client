@@ -2,6 +2,7 @@ import React from 'react'
 
 // libs
 import $ from 'jquery'
+import animate from 'animate.css'
 
 // components
 import Nav from '../Nav'
@@ -21,6 +22,10 @@ class Signup extends React.Component{
 		this.handleName = this.handleName.bind(this)
 		this.handleEmail = this.handleEmail.bind(this)
 		this.handlePass = this.handlePass.bind(this)
+	}
+
+	componentDidMount() {
+		$('#signup').addClass('animated bounceInRight')
 	}
 
 	handleName(event) {
@@ -85,7 +90,7 @@ class Signup extends React.Component{
 	!this.state.isLoggedin ?
 	<div>
 
-<div className="container">
+<div className="container" id="signup">
 <div className="columns">
 <div className="column is-half">
 

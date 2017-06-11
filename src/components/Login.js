@@ -18,6 +18,10 @@ class Login extends React.Component{
 		this.handleEmail = this.handleEmail.bind(this)
 		this.handlePass = this.handlePass.bind(this)
 	}
+
+	componentDidMount() {
+		$('#login').addClass('animated bounceInRight')
+	}
 	
 	handleEmail(e){
   		this.setState({email: e.target.value})
@@ -68,7 +72,7 @@ class Login extends React.Component{
 <div className="container">
 <p id="err"></p>
 <div className="columns">
-<div className="column is-half">
+<div className="column is-half" id="login">
 
 	<div className="field center">
 	  <p className="control has-icons-left has-icons-right">

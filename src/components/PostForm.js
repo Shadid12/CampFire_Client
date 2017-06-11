@@ -5,6 +5,10 @@ import Nav from '../Nav'
 
 // lib
 import $ from 'jquery'
+import animate from 'animate.css'
+
+// css
+import './styles/PostForm.css'
 
 class PostForm extends React.Component{
 
@@ -17,6 +21,11 @@ class PostForm extends React.Component{
 
 		this.handleTitle = this.handleTitle.bind(this)
 		this.handleBody = this.handleBody.bind(this)
+	}
+
+	componentDidMount() {
+		$("#pop").hide()
+		$("#err").hide()
 	}
 
 	handleTitle(e){
@@ -32,12 +41,29 @@ class PostForm extends React.Component{
 		var d = {
 			'post':{ 'title': this.state.title, 'body': this.state.body }
 		}
-
+		var auth = 'bearer '+ window.localStorage.getItem('token')
+		
 		$.ajax({
 		    type: "POST",
 		    url: url,
+		    beforeSend: function (xhr) {
+    			xhr.setRequestHeader('Authorization', auth);
+			},
 		    data: d,
+		    error: () => {
+		    	$('#err').removeClass('animated bounceIn')
+		    	$('#err').show()
+		      	$('#err').html('')
+		      	$('#err').append("<p>You are not authorized!! Login first please</p>")
+		      	$('#err').addClass('animated bounceIn')
+		    },
 		    success: (res) => {
+		      this.setState({ title: '', body: '' })
+		      $('#pop').removeClass('animated bounceIn')
+		      $('#pop').show()
+		      $('#pop').html('')
+		      $('#pop').append("<p>Message Created</p>")
+		      $('#pop').addClass('animated bounceIn')
 		      console.log(res)
 		    }
 		})
@@ -48,6 +74,8 @@ class PostForm extends React.Component{
 			<div>
 				<Nav />
 				<div className="container">
+				<div id="pop" className='notification is-primary'></div>
+				<div id="err" className='notification is-danger'></div>
 					<div className="field">
 					  <p className="control">
 					    <input className="input" type="text" placeholder="Title"
